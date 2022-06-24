@@ -17,10 +17,21 @@
 
             <li>
 
-                <a href="bautismos">
+                <a href="asistentes">
 
-                    <i class="fa fa-book"></i>
-                    <span>Bautismos</span>
+                    <i class="fa fa fa-user"></i>
+                    <span>Asistentes</span>
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="historico">
+
+                    <i class="fa fa-history"></i>
+                    <span>Histórico</span>
 
                 </a>
 
@@ -30,8 +41,19 @@
 
 				<a href="usuarios">
 
-					<i class="fa fa-user"></i>
+					<i class="fa fa-users"></i>
 					<span>Usuarios</span>
+
+				</a>
+
+			</li>
+
+            <li>
+
+				<a href="bautismos">
+
+					<i class="fa fa-book"></i>
+					<span>Bautismos</span>
 
 				</a>
 

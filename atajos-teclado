@@ -1,0 +1,72 @@
+ctrl + shift + backspace = cuando nos cambiamos por accidente de lìnea, con èsto vuelve el puntero al punto anterior
+
+ctrl + alt + s  => configuración
+ctrl + w => Selecciona bloques de código
+ctrl + e => archivos recientes
+ctrl + n => buscar clases en el proyecto
+alt + f12 => abre la ter minal
+alt + f2 => previsualización en el navegador
+ctrl + alt + i => Reindentar
+doble shift => buscador general
+ctrl + d => duplicar bloque de código
+alt + j => busca las repeticiones de un palabra, una por una y se pueden modificar porque genera punteros para cada una
+ctrl + shift + alt + j => Selecciona todas las coincidencias con puntero de una vez
+ctrl + . => oculta (pero no elimina,ni desactiva) pedazos de còdigo
+ctrl + mas  = convertir en comentario de linea (//) (atajo personalizado - tecla al lado de la P)
+ctrl + shift + mas = (atajo personalizado - tecla +) convertir en comentario de bloque (/* */)
+
+ctrl + tab => cambiar de ventana, entre archivos,estructura, cualquier lugar del phpstorm
+ctrl + f => buscar
+ctrl + r => buscar y reemplazar
+alt + (flecha Arriba/flecha Abajo) => navega entre los métodos de un archivo
+ctrl + g => Ir a la línea número?
+F2 => Navega entre los errores y advertencias que detecta el editor
+ctrl + shift + enter => Completa estructuras como if, while, switch, etc. (le agrega las llaves de inicio y final)
+ctrl + shift + (flecha arriba/flecha abajo) => Mueve selección de código arriba o abajo, entre líneas
+
+alt + insert => Generador de código (getters, setters, etc)  // falta investigar màs
+
+DE REFACTORING
+ctrl + alt + L => ordena el código
+ctrl + alt + v => extraer variable
+
+
+lorem*50 => genera 50 parrafos.
+
+FONT AWESOME:
+<script src="https://kit.fontawesome.com/e632f1f723.js" crossorigin="anonymous"></script>
+
+<?php
+echo '<pre>'; var_dump($usuario); echo '</pre>';
+?> // para hacer pruebas de variables
+
+
+
+
+
+
+
+ctrl + f4 => Cerrar pestaña
+alt + flechas de desplazamiento => cambia de etiqueta
+
+Windows + tab => Historial de las aplicaciones abiertas en el computador
+
+======================================================================
+ATAQUES PHP - lo que se usa para evitarlo
+
+1. CROSS-SITE SCRIPTING - Pregmatch     2. CROSS-SITE REQUEST FORGERIES (CSRF) - Token
+3. SQL Injection - bindParam            4. CODE Injection - Al final de los archivo PHP no cerrar con
+                                            la etiqueta ?> , Tener una lista blanca, agregar el archivo
+                                            .htaccess
+5. Robots de Fuerza Bruta - limitar el # de intentos en los login, usar CAPTCHA (el más usado es el
+    reCAPTCHA de Google, encriptar la contraseña
+
+* URL'S AMIGABLES - con .htaccess, debe estar activo en el apache el módulo "rwrite". También en el
+htaccess colocar código para rechazar los robots
+
+
+======================================================================
+NOTAS JJ
+======================================================================
+* Cotejamiento de la bd - utf8mb4-SPANISH-CI2 - ADMITE EMOJIS
+  para bd sencilas - utf8_general_ci

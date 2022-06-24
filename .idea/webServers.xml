@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="227622c8-e2ee-40ad-8835-4fb66b13ab2b" name="pos" url="http://localhost/cursoPHPudemy-Ricardo/pos">
+        <fileTransfer mountedRoot="C:\xampp\htdocs\cursoPHPudemy-Ricardo\pos" accessType="MOUNT" port="0" />
+      </webServer>
+      <webServer id="e1f41ee2-a9e8-49f2-976c-aa4ceb41c4c2" name="GestionEclesial" url="http://localhost/panela">
+        <fileTransfer mountedRoot="C:\xampp\htdocs\panela" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

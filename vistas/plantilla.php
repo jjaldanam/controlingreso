@@ -98,7 +98,7 @@ CUERPO DOCUMENTO
     include "modulos/menu.php";
 
     /*=============================================
-    CONTENIDO
+    CONTENIDO  - LISTA BLANCA DE PÁGINAS PERMITIDAS
     =============================================*/
 
     if(isset($_GET["ruta"])){
@@ -109,8 +109,8 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "productos" ||
          $_GET["ruta"] == "clientes" ||
          $_GET["ruta"] == "ventas" ||
-         $_GET["ruta"] == "crear-venta" ||
-         $_GET["ruta"] == "reportes" ||
+         $_GET["ruta"] == "historico" ||
+         $_GET["ruta"] == "asistentes" ||
          $_GET["ruta"] == "bautismos" ||
          $_GET["ruta"] == "salir"){
 

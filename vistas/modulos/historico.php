@@ -4,7 +4,7 @@
     
     <h1>
       
-      Asistentes
+      Histórico
     
     </h1>
 

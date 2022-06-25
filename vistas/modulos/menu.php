@@ -48,7 +48,7 @@
 
 			</li>
 
-            <li>
+            <!--<li>
 
 				<a href="bautismos">
 
@@ -57,7 +57,7 @@
 
 				</a>
 
-			</li>
+			</li>-->
 
             <!-- ==================================================== -->
             <!-- Quito opciones que no necesito de plantilla - inicia  -->

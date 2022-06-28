@@ -12,7 +12,7 @@
       
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
-      <li class="active">Bautismos</li>
+      <li class="active">Asistentes</li>
     
     </ol>
 
@@ -24,9 +24,9 @@
 
       <div class="box-header with-border">
 
-          <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarPartida">
+          <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarAsistente">
 
-              Agregar Partida
+              Agregar Asistente
 
           </button>
 
@@ -38,23 +38,18 @@
 
               <thead>
 
-                  <tr>
+              <tr>
 
-                      <th style="width:10px">#</th>
-                      <th>No. de Partida</th>
-                      <th>Libro</th>
-                      <th>Folio</th>
-                      <th>Fecha de Celebración</th>
-                      <th>Celebrante</th>
-                      <th>Bautizado</th>
-                      <th>Sexo del Bautizado</th>
-                      <th>Estado</th>
-                      <th>Fecha de Creación</th>
-                      <th>Acciones</th>
+                  <th style="width:10px">#</th>
+                  <th>N.de Documento</th>
+                  <th>Nombres y Apellidos completos</th>
+                  <th>Cargo</th>
+                  <th>Dependencia</th>
+                  <th>Estado</th>
+                  <th>Último login</th>
+                  <th>Acciones</th>
 
-                  </tr>
-
-
+              </tr>
 
               </thead>
 
@@ -66,50 +61,46 @@
               $valor = null;
               $i = 1;
 
-              $usuarios = ControladorBautismos::ctrSeleccionarRegistros($item, $valor);
+              $usuarios = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
 
               foreach ($usuarios as $key => $value){
 
-                  $fechaCelebracion = date_create_from_format('Y-m-d', $value["fechacelebracion"]);
-                  $fechaCelebracion = date_format($fechaCelebracion, 'd-m-Y');
-
                   echo ' <tr>
                   <td>'.$i.'</td>
-                  <td>'.$value["numpartida"].'</td>
-                  <td>'.$value["codlibro"].'</td>
-                  <td>'.$value["folio"].'</td>
-                  <td>'.$fechaCelebracion.'</td>
-                  <td>'.$value["celebrante"].'</td>
-                  <td>'.$value["bautizado"].'</td>
-                  <td>'.$value["bautizadosexo"].'</td>                
-                  ';
+                  <td>'.$value["nombre"].'</td>
+                  <td>'.$value["usuario"].'</td>';
 
+                  if($value["foto"] != ""){
 
-//     TODO: Luego arreglo el boton con ajax -ej: video31 del curso POS - primero lo hago dentro de Modificar bautismo
-                  if($value["estado"] != 0){
-
-                      echo '<td><button class="btn btn-success btn-xs " idCodLibro="'.$value["codlibro"].'" idNumPartida="'.$value["numpartida"].'" estadoUsuario="0">Activado</button></td>';
+                      echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
 
                   }else{
 
-                      echo '<td><button class="btn btn-danger btn-xs " idCodLibro="'.$value["codlibro"].'" idNumPartida="'.$value["numpartida"].'" estadoUsuario="1">Desactivado</button></td>';
+                      echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
 
                   }
 
+                  echo '<td>'.$value["perfil"].'</td>';
 
-                  echo '<td>'.$value["fechacreacion"].'</td>';
+                  if($value["estado"] != 0){
 
-                  echo '
+                      echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="0">Activado</button></td>';
+
+                  }else{
+
+                      echo '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="1">Desactivado</button></td>';
+
+                  }
+
+                  echo '<td>'.$value["ultimo_login"].'</td>
                   <td>
 
                     <div class="btn-group">
                         
-                      <button class="btn btn-warning btnEditarBautismo" idCodLibro="'.$value["codlibro"].'" idNumPartida="'.$value["numpartida"].'" data-toggle="modal" data-target="#modalEditarBautismo"><i class="fa fa-pencil"></i></button> 
-                      
-                      <button class="btn btn-info btnImprimirBautismo" idCodLibro="'.$value["codlibro"].'" idNumPartida="'.$value["numpartida"].'">
-                            <i class="fa fa-print"></i>
-                      </button>
-                      
+                      <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+
+                      <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["id"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fa fa-times"></i></button>
+
                     </div>  
 
                   </td>
@@ -118,6 +109,7 @@
 
                   $i++;
               }
+
 
               ?>
 
@@ -141,7 +133,7 @@
 <!-- VENTANA MODAL - AGREGAR PARTIDA DE BAUTISMO   -->
 <!-- ============================================= -->
 
-<div id="modalAgregarPartida" class="modal fade" role="dialog">
+<div id="modalAgregarAsistente" class="modal fade" role="dialog">
 
     <div class="modal-dialog">
 
@@ -154,7 +146,7 @@
 
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                    <h4 class="modal-title">Agregar Nueva Partida de Bautismo</h4>
+                    <h4 class="modal-title">Agregar Nuevo Asistente</h4>
 
                 </div>
 
@@ -163,277 +155,71 @@
 
                     <div class="box-body">
 
-                        <!-- ENTRADA PARA EL NUMERO DE LIBRO   -->
+                        <!-- ENTRADA PARA EL NUMERO DE DOCUMENTO   -->
                         <div class="form-group">
 
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-book"></i></span>
 
-                                <input type="number" min="0" max="9999" maxlength="4"
+                                <input type="number" min="0" max="9999999999" maxlength="11"
                                        oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                       class="form-control input-lg" name="codigoLibro"
-                                       placeholder="Ingrese el número del Libro" required>
+                                       class="form-control input-lg" name="nidentidad"
+                                       placeholder="INGRESE EL NUMERO DE DOCUMENTO" required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA LOS NOMBRES Y APELLIDOS  -->
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
+
+                                <input type="text" class="form-control input-lg" name="nomyape"
+                                       style="text-transform:uppercase;"
+                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                       placeholder="INGRESE LOS NOMBRES Y APELLIDOS" required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA EL CARGO  -->
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
+
+                                <input type="text" class="form-control input-lg" name="cargo"
+                                       style="text-transform:uppercase;"
+                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                       placeholder="Ingrese el Cargo" required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA LA DEPENDENCIA   -->
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
+
+                                <input type="text" class="form-control input-lg" name="dependencia"
+                                       style="text-transform:uppercase;"
+                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                       placeholder="Dependencia" required>
 
                             </div>
 
                         </div>
 
                         <!-- TODO - Cambiar los íconos de los input   -->
-                        <!-- ENTRADA PARA EL NUMERO DEL FOLIO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="folio"
-                                       placeholder="Ingrese el número del Folio" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL NUMERO DE PARTIDA   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="numeroPartida"
-                                       placeholder="Ingrese el número de Partida" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA FECHA DE CELEBRACION   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="fechaCelebracion"
-                                       placeholder="Ingrese la fecha de celebración" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA FECHA DE NACIMIENTO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="fechaNacimiento"
-                                       placeholder="Ingrese la fecha de Nacimiento" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL LUGAR DE BAUTISMO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       name="lugarBautismo" placeholder="Ingrese el lugar del bautismo" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL CELEBRANTE   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="celebrante"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="Ingrese el nombre del Celebrante" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL NOMBRE DEL BAUTIZADO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="bautizado"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="Ingrese el nombre del Bautizado" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL SEXO DEL BAUTIZADO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <select name="bautizadoSexo" class="form-control input-lg">
-
-                                    <option value="">Seleccionar Sexo</option>
-
-                                    <option value="M">Masculino</option>
-
-                                    <option value="F">Femenino</option>
-
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL NOMBRE DE LA MADRE   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="madre"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="Nombre de la Madre" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL PADRE   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="padre"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="Nombre del Padre" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL PADRINO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="padrino"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="Nombre del Padrino">
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA LA MADRINA  -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="madrina"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="Nombre de la Madrina">
-
-                                <input type="hidden" name="estado" value="1">
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL ABUELO PATERNO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="abueloPaterno"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="Nombre del Abuelo Paterno">
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL ABUELA PATERNA   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="abuelaPaterna"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="Nombre de la Abuela Paterna">
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL ABUELO MATERNO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="abueloMaterno"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="Nombre del Abuelo Materno">
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL ABUELA MATERNA   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i></span>
-
-                                <input type="text" class="form-control input-lg" name="abuelaMaterna"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="Nombre de la Abuela Materna">
-
-                            </div>
-
-                        </div>
-
 
                     </div>
 
@@ -449,7 +235,7 @@
 
                 <?php
 
-                    $registro = ControladorBautismos::ctrRegistroBautismo();
+                    $registro = ControladorAsistentes::ctrRegistroAsistente();
 
                     if($registro == "ok"){
 

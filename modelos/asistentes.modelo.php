@@ -97,7 +97,7 @@ class ModeloAsistentes{
     INSERTAR UNA PARTIDA DE BAUTISMO
     ===========================================================*/
 
-    static public function mdlRegistroBautismo($tabla, $datos){
+    static public function mdlRegistroAsistente($tabla, $datos){
 
         #prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
         $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(numpartida, codlibro, folio, fechacelebracion,

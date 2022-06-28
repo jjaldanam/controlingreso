@@ -138,7 +138,7 @@ class ControladorAsistentes{
     /*===========================================================*/
     // ADICIONAR UNA PARTIDA DE BAUTISMO
     /*===========================================================*/
-    static public function ctrRegistroBautismo(){
+    static public function ctrRegistroAsistente(){
 
         if(isset($_POST["codigoLibro"])){
 

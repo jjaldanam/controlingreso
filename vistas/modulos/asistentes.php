@@ -45,8 +45,7 @@
                   <th>Nombres y Apellidos completos</th>
                   <th>Cargo</th>
                   <th>Dependencia</th>
-                  <th>Estado</th>
-                  <th>Último login</th>
+                  <th>Ultima Acción</th>
                   <th>Acciones</th>
 
               </tr>
@@ -61,45 +60,30 @@
               $valor = null;
               $i = 1;
 
-              $usuarios = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+              $usuarios = ControladorAsistentes::ctrSeleccionarRegistros($item, $valor);
 
               foreach ($usuarios as $key => $value){
 
                   echo ' <tr>
                   <td>'.$i.'</td>
-                  <td>'.$value["nombre"].'</td>
-                  <td>'.$value["usuario"].'</td>';
+                  <td>'.$value["nidentidad"].'</td>
+                  <td>'.$value["nomyape"].'</td>
+                  <td>'.$value["cargo"].'</td>
+                  <td>'.$value["dependencia"].'</td>
+                  <td>'.$value["ultimologin"].' '.$value["ultimologinfecha"].'</td>';
 
-                  if($value["foto"] != ""){
+                  // TODO: Crear campo ultimo ingreso/salida  para que se vea cuando fué la última vez que entró o salió
 
-                      echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
 
-                  }else{
 
-                      echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
-
-                  }
-
-                  echo '<td>'.$value["perfil"].'</td>';
-
-                  if($value["estado"] != 0){
-
-                      echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="0">Activado</button></td>';
-
-                  }else{
-
-                      echo '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="1">Desactivado</button></td>';
-
-                  }
-
-                  echo '<td>'.$value["ultimo_login"].'</td>
+                  echo '
                   <td>
 
                     <div class="btn-group">
                         
-                      <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-success btnEditarUsuario" idUsuario="'.$value["nidentidad"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i>Entrar</button>
 
-                      <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["id"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fa fa-times"></i></button>
+                      <button class="btn btn-warning btnEliminarUsuario" idUsuario="'.$value["nidentidad"].'" ><i class="fa fa-times"></i>Salir</button>
 
                     </div>  
 

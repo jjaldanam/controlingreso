@@ -234,9 +234,9 @@ class ControladorAsistentes{
 
     static public function ctrSeleccionarRegistros($item,$valor){
 
-        $tabla = "partidasbautismos";
+        $tabla = "asistentes";
 
-        $respuesta = ModeloBautismos::mdlSeleccionarRegistros($tabla, $item, $valor);
+        $respuesta = ModeloAsistentes::mdlSeleccionarRegistros($tabla, $item, $valor);
 
         return $respuesta;
     }

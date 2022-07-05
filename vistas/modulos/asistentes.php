@@ -45,8 +45,8 @@
                   <th>Nombres y Apellidos completos</th>
                   <th>Cargo</th>
                   <th>Dependencia</th>
-                  <th>Ultima Acción</th>
                   <th>Acciones</th>
+                  <th>Ultima Acción</th>
 
               </tr>
 
@@ -69,27 +69,24 @@
                   <td>'.$value["nidentidad"].'</td>
                   <td>'.$value["nomyape"].'</td>
                   <td>'.$value["cargo"].'</td>
-                  <td>'.$value["dependencia"].'</td>
-                  <td>'.$value["ultimologin"].' '.$value["ultimologinfecha"].'</td>';
-
-                  // TODO: Crear campo ultimo ingreso/salida  para que se vea cuando fué la última vez que entró o salió
+                  <td>'.$value["dependencia"].'</td>';
 
 
+                  //     TODO: Luego arreglo el boton con ajax -ej: video31 del curso POS - primero lo hago dentro de Modificar bautismo
+                  if($value["ultimologin"] != "Entrada" ){
 
-                  echo '
-                  <td>
+                      echo '<td><button class="btn btn-success  idCodLibro="'.$value["nidentidad"].'" idNumPartida="'.$value["nidentidad"].'" estadoUsuario="0">Entrada</button></td>';
 
-                    <div class="btn-group">
-                        
-                      <button class="btn btn-success btnEditarUsuario" idUsuario="'.$value["nidentidad"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i>Entrar</button>
+                  }else{
 
-                      <button class="btn btn-warning btnEliminarUsuario" idUsuario="'.$value["nidentidad"].'" ><i class="fa fa-times"></i>Salir</button>
+                      echo '<td><button class="btn btn-danger" idCodLibro="'.$value["nidentidad"].'" idNumPartida="'.$value["nidentidad"].'" estadoUsuario="1">Salida</button></td>';
 
-                    </div>  
+                  }
 
-                  </td>
+                  $solamenteFecha = date($value['ultimologinfecha']);
 
-                </tr>';
+                  echo '<td>'.$value["ultimologin"].' -- otro: '.$solamenteFecha.' ---'.$value["ultimologinfecha"].'</td>';
+
 
                   $i++;
               }
@@ -114,7 +111,7 @@
 <!-- /.content-wrapper -->
 
 <!-- ============================================= -->
-<!-- VENTANA MODAL - AGREGAR PARTIDA DE BAUTISMO   -->
+<!-- VENTANA MODAL - AGREGAR NUEVO ASISTENTE   -->
 <!-- ============================================= -->
 
 <div id="modalAgregarAsistente" class="modal fade" role="dialog">
@@ -149,7 +146,7 @@
                                 <input type="number" min="0" max="9999999999" maxlength="11"
                                        oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                        class="form-control input-lg" name="nidentidad"
-                                       placeholder="INGRESE EL NUMERO DE DOCUMENTO" required>
+                                       placeholder="INGRESE EL NÚMERO DE DOCUMENTO" required>
 
                             </div>
 
@@ -165,7 +162,7 @@
                                 <input type="text" class="form-control input-lg" name="nomyape"
                                        style="text-transform:uppercase;"
                                        onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       placeholder="INGRESE LOS NOMBRES Y APELLIDOS" required>
+                                       placeholder="Ingrese los nombres y apellidos." required>
 
                             </div>
 
@@ -335,7 +332,7 @@ MODAL EDITAR BAUTISMO
                             </div>
 
                         </div>
-                        
+
                         <!-- ENTRADA PARA FECHA DE CELEBRACION   -->
                         <div class="form-group">
 

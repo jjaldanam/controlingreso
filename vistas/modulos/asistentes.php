@@ -72,20 +72,33 @@
                   <td>'.$value["dependencia"].'</td>';
 
 
-                  //     TODO: Luego arreglo el boton con ajax -ej: video31 del curso POS - primero lo hago dentro de Modificar bautismo
-                  if($value["ultimologin"] != "Entrada" ){
+                  // Comparar si el último login fue otro día
+                  $fechaActual = date('Y-m-d', time());
+                  $solamenteFecha = date('Y-m-d',strtotime($value['ultimologinfecha']));
 
-                      echo '<td><button class="btn btn-success  idCodLibro="'.$value["nidentidad"].'" idNumPartida="'.$value["nidentidad"].'" estadoUsuario="0">Entrada</button></td>';
+                  //     TODO: Luego arreglo el boton con ajax -ej: video31 del curso POS - primero lo hago dentro de Modificar bautismo
+                  if($value["ultimologin"] != "Entrada" || $fechaActual != $solamenteFecha  ){
+
+                      echo '<td><button class="btn btn-success  nidentidad="'.$value["nidentidad"].'" accion="Entrada">Entrada</button></td>';
 
                   }else{
 
-                      echo '<td><button class="btn btn-danger" idCodLibro="'.$value["nidentidad"].'" idNumPartida="'.$value["nidentidad"].'" estadoUsuario="1">Salida</button></td>';
+                      echo '<td><button class="btn btn-danger" nidentidad="'.$value["nidentidad"].'"  accion="Salida">Salida</button></td>';
 
                   }
 
-                  $solamenteFecha = date($value['ultimologinfecha']);
 
-                  echo '<td>'.$value["ultimologin"].' -- otro: '.$solamenteFecha.' ---'.$value["ultimologinfecha"].'</td>';
+
+
+
+                  $r=0;
+                  if($solamenteFecha == $fechaActual){
+                      $r = 'IGUALES';
+                  }else{
+                      $r = 'DIFERENTES';
+                  }
+
+                  echo '<td>'.$value["ultimologin"].' -- SON:'.$r.' ---'.$value["ultimologinfecha"].'</td>';
 
 
                   $i++;

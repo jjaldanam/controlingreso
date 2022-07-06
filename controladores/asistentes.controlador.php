@@ -140,41 +140,24 @@ class ControladorAsistentes{
     /*===========================================================*/
     static public function ctrRegistroAsistente(){
 
-        if(isset($_POST["codigoLibro"])){
+        if(isset($_POST["nidentidad"])){
 
             // todo -Falta los preg_match de las demàs variables
-            if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["bautizado"]) &&
-                preg_match('/^[0-9]+$/', $_POST["numeroPartida"]) &&
-                preg_match('/^[0-9]+$/', $_POST["codigoLibro"])) {
+            if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nomyape"]) &&
+                preg_match('/^[0-9]+$/', $_POST["nidentidad"]) &&
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["cargo"]) &&
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["dependencia"]) )  {
 
-                $tabla = "partidasbautismos";
+                $tabla = "asistentes";
 
-                $datos = array("numpartida" => $_POST["numeroPartida"],
-                    "codlibro" => $_POST["codigoLibro"],
-                    "folio" => $_POST["folio"],
-                    "fechacelebracion" => $_POST["fechaCelebracion"],
-                    "fechanacimiento" => $_POST["fechaNacimiento"],
-                    "lugarbautismo" => $_POST["lugarBautismo"],
-                    "celebrante" => $_POST["celebrante"],
-                    "bautizado" => $_POST["bautizado"],
-                    "bautizadosexo" => $_POST["bautizadoSexo"],
-                    "bautizadotipodoc" => null,
-                    "bautizadonumdoc" => null,
-                    "tipofiliacion" => null,
-                    "madre" => $_POST["madre"],
-                    "madreestadocivil" => null,
-                    "padre" => $_POST["padre"],
-                    "padreestadocivil" => null,
-                    "padrino" => $_POST["padrino"],
-                    "madrina" => $_POST["madrina"],
-                    "abuelamaterna" => $_POST["abuelaMaterna"],
-                    "abuelomaterno" => $_POST["abueloMaterno"],
-                    "abuelapaterna" => $_POST["abuelaPaterna"],
-                    "abuelopaterno" => $_POST["abueloPaterno"],
-                    "estado" => $_POST["estado"]
+                $datos = array("nidentidad" => $_POST["nidentidad"],
+                    "nomyape" => $_POST["nomyape"],
+                    "cargo" => $_POST["cargo"],
+                    "dependencia" => $_POST["dependencia"],
+                    "ultimologin" => "Entrada"
                     );
 
-                $respuesta = ModeloBautismos::mdlRegistroBautismo($tabla,$datos);
+                $respuesta = ModeloAsistentes::mdlRegistroAsistente($tabla,$datos);
 
                 if($respuesta == "ok"){
 
@@ -191,7 +174,7 @@ class ControladorAsistentes{
                             
                             if(result.value){
                                 
-                                window.location = "bautismos";
+                                window.location = "asistentes";
                                 
                             }
                         });
@@ -206,7 +189,7 @@ class ControladorAsistentes{
 
                     swal({
                         type: "error",
-                        title: "¡El usuario no puede ir vacío o llevar caracteres especiales!",
+                        title: "¡El número de documento no puede ir vacío o llevar caracteres especiales!",
                         showConfirmButton: true,
                         confirmButtonText: "Cerrar",
                         closeOnConfirm: false
@@ -215,7 +198,7 @@ class ControladorAsistentes{
                         
                         if(result.value){
                             
-                            window.location = "bautismos";
+                            window.location = "asistentes";
                             
                         }
                     });

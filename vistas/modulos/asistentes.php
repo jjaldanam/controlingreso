@@ -47,6 +47,7 @@
                   <th>Dependencia</th>
                   <th>Acciones</th>
                   <th>Ultima Acción</th>
+                  <th>Editar</th>
 
               </tr>
 
@@ -76,6 +77,8 @@
                   $fechaActual = date('Y-m-d', time());
                   $solamenteFecha = date('Y-m-d',strtotime($value['ultimologinfecha']));
 
+
+
                   //     TODO: Luego arreglo el boton con ajax -ej: video31 del curso POS - primero lo hago dentro de Modificar bautismo
                   if($value["ultimologin"] != "Entrada" || $fechaActual != $solamenteFecha  ){
 
@@ -88,18 +91,19 @@
                   }
 
 
+                  echo '<td>'.$value["ultimologin"].' - '.$value["ultimologinfecha"].'</td>';
+                  echo '<td>
+                            <div class="btn-group">
+                        
+                              <button class="btn btn-warning btnEditarAsitente" nidentidad="'.$value["nidentidad"].'" data-toggle="modal" data-target="#modalEditarAsistente">
+                                <i class="fa fa-pencil"></i> 
+                              </button>
+                              
+                            </div>
+ 
+                        </td>';
 
-
-
-                  $r=0;
-                  if($solamenteFecha == $fechaActual){
-                      $r = 'IGUALES';
-                  }else{
-                      $r = 'DIFERENTES';
-                  }
-
-                  echo '<td>'.$value["ultimologin"].' -- SON:'.$r.' ---'.$value["ultimologinfecha"].'</td>';
-
+                  echo '</tr>';
 
                   $i++;
               }
@@ -271,10 +275,10 @@
 </div>
 
 <!--=====================================
-MODAL EDITAR BAUTISMO
+MODAL EDITAR ASISTENTE
 ======================================-->
 
-<div id="modalEditarBautismo" class="modal fade" role="dialog">
+<div id="modalEditarAsistente" class="modal fade" role="dialog">
 
     <div class="modal-dialog">
 
@@ -290,7 +294,7 @@ MODAL EDITAR BAUTISMO
 
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                    <h4 class="modal-title">Editar Bautismo</h4>
+                    <h4 class="modal-title">Editar Asistente</h4>
 
                 </div>
 
@@ -302,21 +306,8 @@ MODAL EDITAR BAUTISMO
 
                     <div class="box-body">
 
-                        <!-- ENTRADA PARA EL NUMERO DE LIBRO   -->
-                        <div class="form-group">
 
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i> &nbsp;&nbsp; Codigo libro: </span>
-
-                                <input type="text" class="form-control input-lg" name="editarCodigoLibro"
-                                       id="editarCodigoLibro" value="" readonly>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL NUMERO DE PARTIDA   -->
+                        <!-- ENTRADA PARA EL NUMERO DE DOCUMENTO   -->
                         <div class="form-group">
 
                             <div class="input-group">

@@ -50,12 +50,14 @@ class ControladorAsistentes{
 //  TODO: Falta crear los Preg_macth de cada imput de los formularios de agregar partida y actualizar partida
 //  TODO: INVESTIGAR ctype_alnum - supuestamente reemplaza el pregmatch que recibe solo números
     /*===========================================================*/
-    // EDITAR BAUTISMO - ACTUALIZAR REGISTROS
+    // EDITAR ASISTENTE - ACTUALIZAR REGISTROS
     /*===========================================================*/
 
     static public function ctrActualizarRegistro(){
 
         if(isset($_POST["editarNidentidad"])){
+
+
 
             if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNomyape"]) &&
                 preg_match('/^[0-9]+$/', $_POST["editarNidentidad"]) &&
@@ -95,11 +97,17 @@ class ControladorAsistentes{
 
             }else{
 
+                $auxiliar = "";
+
+                foreach($_POST as $campo => $valor){
+                    $auxiliar= $auxiliar."- ". $campo ." = ". $valor."--";
+                }
+
                 echo'<script>
 
 					swal({
 						  type: "error",
-						  title: "¡El número de identidad no puede ir vacío o llevar caracteres especiales!",
+						  title: "¡El número de identidad no puede ir vacío o llevar caracteres especiales! '.$auxiliar.'",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
@@ -207,20 +215,7 @@ class ControladorAsistentes{
         return $respuesta;
     }
 
-    /*===========================================================*/
-    // LISTAR TABLA CON DOS YAVES PRIMARIAS
-    /*===========================================================*/
 
-
-    static public function ctrMostrarPartidasBautismo($yave1,$valor1,$yave2,$valor2){
-
-        $tabla = "partidasbautismos";
-
-
-        $respuesta = ModeloBautismos::mdlMostrarPartidasBautismo($tabla, $yave1, $valor1, $yave2, $valor2);
-
-        return $respuesta;
-    }
 
 
 

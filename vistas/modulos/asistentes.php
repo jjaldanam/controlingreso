@@ -95,7 +95,7 @@
                   echo '<td>
                             <div class="btn-group">
                         
-                              <button class="btn btn-warning btnEditarAsitente" nidentidad="'.$value["nidentidad"].'" data-toggle="modal" data-target="#modalEditarAsistente">
+                              <button class="btn btn-warning btnEditarAsistente" nidentidad="'.$value["nidentidad"].'" data-toggle="modal" data-target="#modalEditarAsistente">
                                 <i class="fa fa-pencil"></i> 
                               </button>
                               

@@ -307,282 +307,66 @@ MODAL EDITAR ASISTENTE
                     <div class="box-body">
 
 
-                        <!-- ENTRADA PARA EL NUMERO DE DOCUMENTO   -->
+                        <!-- ENTRADA PARA EL NUMERO IDENTIDAD   -->
                         <div class="form-group">
 
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-book"></i> &nbsp;&nbsp; Número de
-                                    Partida: </span>
+                                    Identidad: </span>
 
-                                <input type="text" class="form-control input-lg" name="editarNumeroPartida"
-                                       id="editarNumeroPartida" value="" readonly>
+                                <input type="text" class="form-control input-lg" name="editarNidentidad"
+                                       id="editarNidentidad" value="" readonly>
 
                             </div>
 
                         </div>
 
                         <!-- TODO - Cambiar los íconos de los input   -->
-                        <!-- ENTRADA PARA EL NUMERO DEL FOLIO   -->
+                        <!-- ENTRADA PARA LOS NOMBRES Y APELLIDOS  -->
                         <div class="form-group">
 
                             <div class="input-group">
 
-                                <span class="input-group-addon"><i class="fa fa-book"></i>  Folio: </span>
-
-                                <input type="text" class="form-control input-lg" name="editarFolio"
-                                       id="editarFolio" value="" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA FECHA DE CELEBRACION   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i> &nbsp;&nbsp; Fecha de
-                                    celebración: </span>
-
-                                <input type="text" class="form-control input-lg" name="editarFechaCelebracion"
-                                       id="editarFechaCelebracion" value="" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA FECHA DE NACIMIENTO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i> &nbsp;&nbsp; Fecha de
-                                    nacimiento: </span>
-
-                                <input type="text" class="form-control input-lg" name="editarFechaNacimiento"
-                                       id="editarFechaNacimiento" value="" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL LUGAR DE BAUTISMO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i> &nbsp;&nbsp; Lugar de
-                                    Bautismo: </span>
-
-                                <input type="text" class="form-control input-lg" name="editarLugarBautismo"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarLugarBautismo" value="" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL CELEBRANTE   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Celebrante:
+                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Nombres y Apellidos:
                                 </span>
 
-                                <input type="text" class="form-control input-lg" name="editarCelebrante"
+                                <input type="text" class="form-control input-lg" name="editarNomyape"
                                        style="text-transform:uppercase;"
                                        onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarCelebrante" value="" required>
+                                       id="editarNomyape" value="" required>
 
                             </div>
 
                         </div>
 
-                        <!-- ENTRADA PARA EL NOMBRE DEL BAUTIZADO   -->
+                        <!-- ENTRADA PARA CARGO -->
                         <div class="form-group">
 
                             <div class="input-group">
 
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Nombre
-                                    del Bautizado:</span>
+                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Cargo:</span>
 
-                                <input type="text" class="form-control input-lg" name="editarBautizado"
+                                <input type="text" class="form-control input-lg" name="editarCargo"
                                        style="text-transform:uppercase;"
                                        onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarBautizado" value="" required>
+                                       id="editarCargo" value="" required>
 
                             </div>
 
                         </div>
 
-                        <!-- ENTRADA PARA EL SEXO DEL BAUTIZADO   -->
+                        <!-- ENTRADA PARA DEPENDENCIA -->
                         <div class="form-group">
 
                             <div class="input-group">
 
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Sexo:</span>
+                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Dependencia:</span>
 
-                                <select name="editarBautizadoSexo" class="form-control input-lg">
-
-                                    <option value="" id="editarBautizadoSexo"></option>
-
-                                    <option value="M">Masculino</option>
-
-                                    <option value="F">Femenino</option>
-
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL NOMBRE DE LA MADRE   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Madre:</span>
-
-                                <input type="text" class="form-control input-lg" name="editarMadre"
+                                <input type="text" class="form-control input-lg" name="editarDependencia"
                                        style="text-transform:uppercase;"
                                        onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarMadre" value="" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL PADRE   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Padre:</span>
-
-                                <input type="text" class="form-control input-lg" name="editarPadre"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarPadre" value="" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL PADRINO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Padrino:</span>
-
-                                <input type="text" class="form-control input-lg" name="editarPadrino"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarPadrino" value="">
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA LA MADRINA  -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Madrina:</span>
-
-                                <input type="text" class="form-control input-lg" name="editarMadrina"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarMadrina" value="">
-
-                            </div>
-
-                        </div>
-
-                        <!-- EDITAR ABUELO PATERNO  -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Abuelo Paterno:</span>
-
-                                <input type="text" class="form-control input-lg" name="editarAbueloPaterno"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarAbueloPaterno" value="">
-
-                            </div>
-
-                        </div>
-
-                        <!-- EDITAR ABUELA PATERNA  -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Abuela Paterna:</span>
-
-                                <input type="text" class="form-control input-lg" name="editarAbuelaPaterna"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarAbuelaPaterna" value="">
-
-                            </div>
-
-                        </div>
-
-                        <!-- EDITAR ABUELO MATERNO  -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Abuelo Materno:</span>
-
-                                <input type="text" class="form-control input-lg" name="editarAbueloMaterno"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarAbueloMaterno" value="">
-
-                            </div>
-
-                        </div>
-
-                        <!-- EDITAR ABUELA MATERNA  -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Abuela Materna:</span>
-
-                                <input type="text" class="form-control input-lg" name="editarAbuelaMaterna"
-                                       style="text-transform:uppercase;"
-                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
-                                       id="editarAbuelaMaterna" value="">
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA EL ESTADO   -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-book"></i>Estado:</span>
-
-                                <select name="editarEstado" class="form-control input-lg">
-
-                                    <option value="" id="editarEstado"></option>
-
-                                    <option value="1">Activado</option>
-
-                                    <option value="0">Desactivado</option>
-
-                                </select>
+                                       id="editarDependencia" value="" required>
 
                             </div>
 
@@ -601,13 +385,13 @@ MODAL EDITAR ASISTENTE
 
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-                    <button type="submit" class="btn btn-primary">Modificar Bautismo</button>
+                    <button type="submit" class="btn btn-primary">Modificar Asistente</button>
 
                 </div>
 
                 <?php
 
-                 $editarBautismo = ControladorBautismos::ctrActualizarRegistro();
+                 $editarAsistente = ControladorAsistentes::ctrActualizarRegistro();
 
                 ?>
 

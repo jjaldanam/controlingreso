@@ -55,41 +55,22 @@ class ControladorAsistentes{
 
     static public function ctrActualizarRegistro(){
 
-        if(isset($_POST["editarCodigoLibro"])){
+        if(isset($_POST["editarNidentidad"])){
 
-            if(preg_match('/^[0-9]+$/', $_POST["editarCodigoLibro"]) &&
-                preg_match('/^[0-9]+$/', $_POST["editarNumeroPartida"]) &&
-                preg_match('/^[0-9]+$/', $_POST["editarNumeroPartida"]) &&
-                preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarFolio"])) {
+            if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNomyape"]) &&
+                preg_match('/^[0-9]+$/', $_POST["editarNidentidad"]) &&
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCargo"]) &&
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDependencia"]) )  {
 
-                $tabla = "partidasbautismos";
+                $tabla = "asistentes";
 
-                $datos = array("numpartida" => $_POST["editarNumeroPartida"],
-                    "codlibro" => $_POST["editarCodigoLibro"],
-                    "folio" => $_POST["editarFolio"],
-                    "fechacelebracion" => $_POST["editarFechaCelebracion"],
-                    "fechanacimiento" => $_POST["editarFechaNacimiento"],
-                    "lugarbautismo" => $_POST["editarLugarBautismo"],
-                    "celebrante" => $_POST["editarCelebrante"],
-                    "bautizado" => $_POST["editarBautizado"],
-                    "bautizadosexo" => $_POST["editarBautizadoSexo"],
-                    "bautizadotipodoc" => null,
-                    "bautizadonumdoc" => null,
-                    "tipofiliacion" => null,
-                    "madre" => $_POST["editarMadre"],
-                    "madreestadocivil" => null,
-                    "padre" => $_POST["editarPadre"],
-                    "padreestadocivil" => null,
-                    "padrino" => $_POST["editarPadrino"],
-                    "madrina" => $_POST["editarMadrina"],
-                    "estado" => $_POST["editarEstado"],
-                    "abuelamaterna" => $_POST["editarAbuelaMaterna"],
-                    "abuelomaterno" => $_POST["editarAbueloMaterno"],
-                    "abuelapaterna" => $_POST["editarAbuelaPaterna"],
-                    "abuelopaterno" => $_POST["editarAbueloPaterno"]
+                $datos = array("nidentidad" => $_POST["editarNidentidad"],
+                    "nomyape" => $_POST["editarNomyape"],
+                    "cargo" => $_POST["editarCargo"],
+                    "dependencia" => $_POST["editarDependencia"]
                 );
 
-                $respuesta = ModeloBautismos::mdlActualizarRegistro($tabla, $datos);
+                $respuesta = ModeloAsistentes::mdlActualizarRegistro($tabla, $datos);
 
                 if($respuesta == "ok"){
 
@@ -97,13 +78,13 @@ class ControladorAsistentes{
 
 					swal({
 						  type: "success",
-						  title: "El usuario ha sido editado correctamente",
+						  title: "El Asistente ha sido editado correctamente",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
 									if (result.value) {
 
-									window.location = "bautismos";
+									window.location = "asistentes";
 
 									}
 								})
@@ -118,13 +99,13 @@ class ControladorAsistentes{
 
 					swal({
 						  type: "error",
-						  title: "¡El código del libro no puede ir vacío o llevar caracteres especiales!",
+						  title: "¡El número de identidad no puede ir vacío o llevar caracteres especiales!",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "bautismos";
+							window.location = "asistentes";
 
 							}
 						})
@@ -136,7 +117,7 @@ class ControladorAsistentes{
     }
 
     /*===========================================================*/
-    // ADICIONAR UNA PARTIDA DE BAUTISMO
+    // ADICIONAR UN ASISTENTE
     /*===========================================================*/
     static public function ctrRegistroAsistente(){
 
@@ -149,12 +130,14 @@ class ControladorAsistentes{
                 preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["dependencia"]) )  {
 
                 $tabla = "asistentes";
+                $marcaDeTiempo = date('Y-m-d H:i:s', time());;
 
                 $datos = array("nidentidad" => $_POST["nidentidad"],
                     "nomyape" => $_POST["nomyape"],
                     "cargo" => $_POST["cargo"],
                     "dependencia" => $_POST["dependencia"],
-                    "ultimologin" => "Entrada"
+                    "ultimologin" => "Entrada",
+                    "ultimologinfecha" => $marcaDeTiempo
                     );
 
                 $respuesta = ModeloAsistentes::mdlRegistroAsistente($tabla,$datos);

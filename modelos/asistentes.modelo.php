@@ -38,7 +38,7 @@ class ModeloAsistentes{
     static public function mdlActualizarRegistro($tabla, $datos){
 
 
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET codlibro=:codlibro,folio=:folio,
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET n=:codlibro,folio=:folio,
                                                         fechacelebracion=:fechacelebracion,lugarbautismo=:lugarbautismo,
                                                         fechanacimiento=:fechanacimiento,
                                                         celebrante=:celebrante, bautizado=:bautizado, 
@@ -102,8 +102,10 @@ class ModeloAsistentes{
 
         // Crear el registro en la tabla ASISTENTES
         #prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla( nidentidad, nomyape, cargo, dependencia, ultimologin ) 
-                                                VALUES ( :nidentidad, :nomyape, :cargo, :dependencia, :ultimologin )"
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla( nidentidad, nomyape, cargo, dependencia,
+                                                                        ultimologin, ultimologinfecha ) 
+                                                VALUES ( :nidentidad, :nomyape, :cargo, :dependencia, :ultimologin,
+                                                         :ultimologinfecha )"
         );
 
         #bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
@@ -112,6 +114,7 @@ class ModeloAsistentes{
         $stmt->bindParam(":cargo", $datos["cargo"], PDO::PARAM_STR);
         $stmt->bindParam(":dependencia", $datos["dependencia"], PDO::PARAM_STR);
         $stmt->bindParam(":ultimologin", $datos["ultimologin"], PDO::PARAM_STR);
+        $stmt->bindParam(":ultimologinfecha", $datos["ultimologinfecha"], PDO::PARAM_STR);
 
 
         if ($stmt->execute()){
@@ -123,7 +126,7 @@ class ModeloAsistentes{
             );
 
             $fechaActual = date('Y-m-d', time());
-            $horaActual = date('h:i:s A');
+            $horaActual = date('H:i:s');
 
             $stmt2->bindParam(":nidentidad", $datos["nidentidad"], PDO::PARAM_INT);
             $stmt2->bindParam(":tipoevento", $datos["ultimologin"], PDO::PARAM_STR);

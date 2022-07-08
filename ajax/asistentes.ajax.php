@@ -22,6 +22,26 @@ class AjaxAsistentes{
 
 	}
 
+    /*=============================================
+    ACTIVAR USUARIO
+    =============================================*/
+
+    public $activarNidentidad;
+    public $activarAccion;
+
+
+    public function ajaxInsertarHistorico(){
+
+        $tabla = "historico";
+
+
+        $valor1 = $this->activarAccion;
+        $valor2 = $this->activarNidentidad;
+
+        $respuesta = ModeloAsistentes::mdlInsertarHistorico($tabla, $valor1, $valor2);
+
+    }
+
 
 }
 
@@ -36,6 +56,19 @@ if(isset($_POST["nidentidad"])){
 
 }
 
+/*=============================================
+ ACTIVAR USUARIO
+=============================================*/
+
+if(isset($_POST["activarNidentidad"])){
+
+    $activarHistorico = new AjaxAsistentes();
+    $activarHistorico -> activarNidentidad = $_POST["activarNidentidad"];
+    $activarHistorico -> activarAccion = $_POST["activarAccion"];
+
+    $activarHistorico -> ajaxInsertarHistorico();
+
+}
 
 
 

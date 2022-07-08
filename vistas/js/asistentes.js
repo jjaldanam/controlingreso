@@ -39,18 +39,45 @@ $(document).on("click", ".btnEditarAsistente", function(){
 
 
 /*=============================================
-IMPRIMIR PARTIDA DE BAUTISMO
+ACTIVAR -ENTRADA/SALIDA DE  ASISTENTE
 =============================================*/
-$(".tablas").on("click", ".btnImprimirBautismo", function(){
+$(".btnActivarHistorico").click(function (){
 
-	var idCodLibro = $(this).attr("idCodLibro");
-	var idNumPartida = $(this).attr("idNumPartida");
+	var nidentidad = $(this).attr("nidentidad");
+	var accion = $(this).attr("accion");
 
-	// var datos = new FormData();
-	// datos.append("idCodLibro", idCodLibro);
-	// datos.append("idNumPartida", idNumPartida);
+	var datos = new FormData();
+	datos.append("activarNidentidad", nidentidad);
+	datos.append("activarAccion", accion);
 
-	window.open("extensiones/tcpdf/pdf/partidaBautismo.php?libro="+idCodLibro+"&partida="+idNumPartida, "_blank");
+	$.ajax({
+
+		url:"ajax/asistentes.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(respuesta){
+
+		}
+	})
+
+
+	if(accion == 'Salida' ){
+
+		$(this).addClass('btn-success');
+		$(this).removeClass('btn-danger');
+		$(this).html('Entrada');
+		$(this).attr('accion','Entrada');
+
+	}else{
+		$(this).removeClass('btn-success');
+		$(this).addClass('btn-danger');
+	 	$(this).html('Salida');
+	 	$(this).attr('accion','Salida');
+
+	 }
 
 
 })

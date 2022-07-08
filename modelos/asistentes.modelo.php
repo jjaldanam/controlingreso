@@ -159,6 +159,62 @@ class ModeloAsistentes{
         $stmt = null;
     }
 
+    /*=============================================
+    INSERTAR HISTORICO - BOTON AJAX
+    =============================================*/
+
+    static public function mdlInsertarHistorico($tabla, $valor1, $valor2){
+
+        // Crear el registro en la tabla HISTORICO
+        $stmt2 = Conexion::conectar()->prepare("INSERT INTO $tabla ( id_historico, nidentidad_historico, accion, fecha, hora ) 
+                                                VALUES ( NULL, :nidentidad, :accion, :fecha, :hora )"
+        );
+
+        $fechaActual = date('Y-m-d', time());
+        $horaActual = date('H:i:s');
+
+        $stmt2->bindParam(":nidentidad", $valor2, PDO::PARAM_INT);
+        $stmt2->bindParam(":accion", $valor1, PDO::PARAM_STR);
+        $stmt2->bindParam(":fecha", $fechaActual, PDO::PARAM_STR);
+        $stmt2->bindParam(":hora", $horaActual, PDO::PARAM_STR);
+
+
+        // TERMINA de crear el registro en el HISTORICO
+
+
+        if($stmt2 -> execute()){
+
+            $marcaDeTiempo = date('Y-m-d H:i:s', time());
+
+
+            $stmt1 = Conexion::conectar()->prepare("UPDATE asistentes SET ultimologin= '$valor1',
+                                                            ultimologinfecha='$marcaDeTiempo'
+                                                            WHERE nidentidad = $valor2");
+
+            if(!$stmt1->execute()){
+                echo "error actualizando el asistente";
+            }
+
+
+            $stmt1->close();
+            $stmt1 = null;
+            // TERMINA de actualizar asistente
+
+
+            return "ok";
+
+        }else{
+
+            return "error";
+
+        }
+
+        $stmt2 -> close();
+
+        $stmt2 = null;
+
+    }
+
     /*===========================================================
     ACTUALIZAR UN INTENTO FALLIDO
     ===========================================================*/

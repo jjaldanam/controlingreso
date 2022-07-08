@@ -79,14 +79,14 @@
 
 
 
-                  //     TODO: Luego arreglo el boton con ajax -ej: video31 del curso POS - primero lo hago dentro de Modificar bautismo
+                  //     TODO: Luego arreglo el boton con ajax -ej: video48 "Activar o desactivar usuarios" del curso POS - primero lo hago dentro de Modificar bautismo
                   if($value["ultimologin"] != "Entrada" || $fechaActual != $solamenteFecha  ){
 
-                      echo '<td><button class="btn btn-success  nidentidad="'.$value["nidentidad"].'" accion="Entrada">Entrada</button></td>';
+                      echo '<td><button class="btn btn-success btnActivarHistorico"  nidentidad="'.$value["nidentidad"].'" accion="Entrada">Entrada</button></td>';
 
                   }else{
 
-                      echo '<td><button class="btn btn-danger" nidentidad="'.$value["nidentidad"].'"  accion="Salida">Salida</button></td>';
+                      echo '<td><button class="btn btn-danger btnActivarHistorico" nidentidad="'.$value["nidentidad"].'"  accion="Salida">Salida</button></td>';
 
                   }
 

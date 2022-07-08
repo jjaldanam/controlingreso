@@ -10,7 +10,7 @@ class ControladorAsistentes{
 
         if(isset($_POST["eliminarRegistro"])){
 
-            $usuario = ModeloFormularios::mdlSeleccionarRegistros("registros", "token", $_POST["eliminarRegistro"]);
+            $usuario = ModeloAsistentes::mdlSeleccionarRegistros("registros", "token", $_POST["eliminarRegistro"]);
 
             $compararToken = md5($usuario["nombre"]."+".$usuario["email"]);
 
@@ -20,7 +20,7 @@ class ControladorAsistentes{
                 $tabla = "registros";
                 $valor = $_POST["eliminarRegistro"];
 
-                $respuesta = ModeloFormularios::mdlEliminarRegistro($tabla,$valor);
+                $respuesta = ModeloAsistentes::mdlEliminarRegistro($tabla,$valor);
 
                 if ($respuesta == "ok"){
 
@@ -58,11 +58,15 @@ class ControladorAsistentes{
         if(isset($_POST["editarNidentidad"])){
 
 
+            // PROBLEMA - NO ME FUNCIONA EL PREGMATCH CON LOS DATOS PRECARGADOS DEL SENA
+            // Este preg_match no admite el símbolo de guión en el contenido.
 
-            if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNomyape"]) &&
-                preg_match('/^[0-9]+$/', $_POST["editarNidentidad"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCargo"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDependencia"]) )  {
+            if(
+                preg_match('/^[0-9]+$/', $_POST["editarNidentidad"])
+                && preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNomyape"])
+                && preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCargo"])
+                && preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDependencia"])
+                )  {
 
                 $tabla = "asistentes";
 
@@ -97,17 +101,18 @@ class ControladorAsistentes{
 
             }else{
 
-                $auxiliar = "";
-
-                foreach($_POST as $campo => $valor){
-                    $auxiliar= $auxiliar."- ". $campo ." = ". $valor."--";
-                }
+                //  PROBANDO QUE LLEGA
+                $auxiliar = "=|";
+//
+//                foreach($_POST as $campo => $valor){
+//                    $auxiliar= $auxiliar."°-". $campo ."=".$valor."-|";
+//                }
 
                 echo'<script>
 
 					swal({
 						  type: "error",
-						  title: "¡El número de identidad no puede ir vacío o llevar caracteres especiales! '.$auxiliar.'",
+						  title: "¡Los datos no pueden ir vacío o llevar caracteres especiales! '.$auxiliar.'",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
@@ -138,7 +143,7 @@ class ControladorAsistentes{
                 preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["dependencia"]) )  {
 
                 $tabla = "asistentes";
-                $marcaDeTiempo = date('Y-m-d H:i:s', time());;
+                $marcaDeTiempo = date('Y-m-d H:i:s', time());
 
                 $datos = array("nidentidad" => $_POST["nidentidad"],
                     "nomyape" => $_POST["nomyape"],

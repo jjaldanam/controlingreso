@@ -90,6 +90,8 @@ class ControladorAsistentes{
 						  }).then(function(result){
 									if (result.value) {
 
+                        
+									    
 									window.location = "asistentes";
 
 									}
@@ -218,6 +220,75 @@ class ControladorAsistentes{
         $respuesta = ModeloAsistentes::mdlSeleccionarRegistros($tabla, $item, $valor);
 
         return $respuesta;
+    }
+
+    /*===========================================================*/
+    // AGREGAR AL HISTÓRICO Y ACTUALIZAR ASISTENTES
+    /*===========================================================*/
+
+    static public function ctrConfirmarHistorico(){
+
+        if(isset($_POST["confirmarNidentidad"])){
+
+
+
+            $tabla = "historico";
+            $valor1 = $_POST['confirmarAccion'];
+            $valor2 = $_POST['confirmarNidentidad'];
+
+
+            $respuesta = ModeloAsistentes::mdlInsertarHistorico($tabla, $valor1, $valor2);
+
+            if($respuesta == "ok"){
+
+                echo '<script>
+
+                        swal({
+                            type: "success",
+                            title: "¡El usuario ha sido guardado correctamente!",
+                            showConfirmButton: true,
+                            confirmButtonText: "Cerrar",
+                            closeOnConfirm: false
+                            
+                        }).then((result)=>{
+                            
+                            if(result.value){
+                                
+                                window.location.replace("asistentes");
+                                
+                            }
+                        });
+                    
+                    </script>';
+
+            }else{
+
+                echo'<script>
+
+					swal({
+						  type: "error",
+						  title: " La confirmación de la accion falló ",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "confirmacion";
+
+							}
+						})
+
+			  	</script>';
+
+
+
+            }
+
+        }
+
+
+
+
     }
 
 

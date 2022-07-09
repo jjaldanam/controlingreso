@@ -37,10 +37,34 @@ $(document).on("click", ".btnEditarAsistente", function(){
 
 })
 
+/*=============================================
+CONFIRMAR ACCION
+=============================================*/
+
+$(document).on("click", ".btnAccion", function(){
+
+	var nidentidad = $(this).attr("nidentidad");
+	var nomyape = $(this).attr("nomyape");
+	var accion = $(this).attr("accion")
+
+
+	// confirmarNidentidad
+	$("#confirmarNidentidad").val(nidentidad);
+	$("#confirmarNomyape").val(nomyape);
+	$("#confirmarAccion").val(accion);
+	$("#confirmarAccionTexto").html(accion);
+
+
+
+})
+
+
+
 
 /*=============================================
-ACTIVAR -ENTRADA/SALIDA DE  ASISTENTE
+JUNTO CON AJAX - ACTIVAR -ENTRADA/SALIDA DE  ASISTENTE    - TEMPORALMENTE NO USADO
 =============================================*/
+/*
 $(".btnActivarHistorico").click(function (){
 
 	var nidentidad = $(this).attr("nidentidad");
@@ -82,4 +106,4 @@ $(".btnActivarHistorico").click(function (){
 
 })
 
-
+*/

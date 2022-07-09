@@ -82,11 +82,13 @@
                   //     TODO: Luego arreglo el boton con ajax -ej: video48 "Activar o desactivar usuarios" del curso POS - primero lo hago dentro de Modificar bautismo
                   if($value["ultimologin"] != "Entrada" || $fechaActual != $solamenteFecha  ){
 
-                      echo '<td><button class="btn btn-success btnActivarHistorico"  nidentidad="'.$value["nidentidad"].'" accion="Entrada">Entrada</button></td>';
+                      // PARA ACTIVAR EL BOTON AJAX - CUANDO SE PUEDA CORREGIR 09/JULIO/2022
+//                      echo '<td><button class="btn btn-success btnActivarHistorico"  nidentidad="'.$value["nidentidad"].'" accion="Entrada">Entrada</button></td>';
+                      echo '<td><button class="btn btn-success btnAccion" nidentidad="'.$value["nidentidad"].'" accion="Entrada"  nomyape="'.$value["nomyape"].'" data-toggle="modal" data-target="#modalAccion">Entrada</button></td>';
 
                   }else{
 
-                      echo '<td><button class="btn btn-danger btnActivarHistorico" nidentidad="'.$value["nidentidad"].'"  accion="Salida">Salida</button></td>';
+                      echo '<td><button class="btn btn-danger btnAccion" nidentidad="'.$value["nidentidad"].'"  accion="Salida"  nomyape="'.$value["nomyape"].'" data-toggle="modal" data-target="#modalAccion">Salida</button></td>';
 
                   }
 
@@ -392,6 +394,109 @@ MODAL EDITAR ASISTENTE
                 <?php
 
                  $editarAsistente = ControladorAsistentes::ctrActualizarRegistro();
+
+                ?>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--=====================================
+MODAL CONFIRMAR ACCION ( ENTRADA / SALIDA )
+======================================-->
+
+<div id="modalAccion" class="modal fade" role="dialog">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <form role="form" method="post" enctype="multipart/form-data">
+
+                <!--=====================================
+                CABEZA DEL MODAL
+                ======================================-->
+
+                <div class="modal-header" style="background:#3c8dbc; color:white">
+
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    <h4 class="modal-title">Confirmar la Entrada o Salida</h4>
+
+                </div>
+
+                <!--=====================================
+                CUERPO DEL MODAL
+                ======================================-->
+
+                <div class="modal-body">
+
+                    <div class="box-body">
+
+
+                        <!-- ENTRADA PARA EL NUMERO IDENTIDAD   -->
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-book"></i> &nbsp;&nbsp; Número de
+                                    Identidad: </span>
+
+                                <input type="text" class="form-control input-lg" name="confirmarNidentidad"
+                                       id="confirmarNidentidad" value="" readonly>
+
+                            </div>
+
+                        </div>
+
+                        <!-- TODO - Cambiar los íconos de los input   -->
+                        <!-- ENTRADA PARA LOS NOMBRES Y APELLIDOS  -->
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-book"></i>&nbsp;&nbsp; Nombres y Apellidos:
+                                </span>
+
+                                <input type="text" class="form-control input-lg" name="confirmarNomyape"
+                                       style="text-transform:uppercase;"
+                                       onkeyup="javascript:this.value=this.value.toUpperCase();"
+                                       id="confirmarNomyape"  value="" readonly>
+
+                            </div>
+                            <div>
+                                <h2>Confirmar la:  <span id="confirmarAccionTexto"></span></h2>
+                                <input type="hidden" id="confirmarAccion" name="confirmarAccion" value="">
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+                <!--=====================================
+                PIE DEL MODAL
+                ======================================-->
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+
+                </div>
+
+                <?php
+
+                 $confirmarAccion = ControladorAsistentes::ctrConfirmarHistorico();
 
                 ?>
 

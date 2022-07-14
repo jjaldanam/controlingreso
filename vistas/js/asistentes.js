@@ -37,26 +37,26 @@ $(document).on("click", ".btnEditarAsistente", function(){
 
 })
 
-/*=============================================
-CONFIRMAR ACCION
-=============================================*/
-
-$(document).on("click", ".btnAccion", function(){
-
-	var nidentidad = $(this).attr("nidentidad");
-	var nomyape = $(this).attr("nomyape");
-	var accion = $(this).attr("accion")
-
-
-	// confirmarNidentidad
-	$("#confirmarNidentidad").val(nidentidad);
-	$("#confirmarNomyape").val(nomyape);
-	$("#confirmarAccion").val(accion);
-	$("#confirmarAccionTexto").html(accion);
-
-
-
-})
+// /*=============================================
+// CONFIRMAR ACCION con MODAL - ME FALLA AL MOMENTO DE ACTUALIZAR LA ÚLTIMA ACCION, NO REGARGA BIEN LA PAGINA DESPUES DE HACER LOS CAMBIOS EN LA BD
+// =============================================*/
+//
+// $(document).on("click", ".btnAccion", function(){
+//
+// 	var nidentidad = $(this).attr("nidentidad");
+// 	var nomyape = $(this).attr("nomyape");
+// 	var accion = $(this).attr("accion")
+//
+//
+// 	// confirmarNidentidad
+// 	$("#confirmarNidentidad").val(nidentidad);
+// 	$("#confirmarNomyape").val(nomyape);
+// 	$("#confirmarAccion").val(accion);
+// 	$("#confirmarAccionTexto").html(accion);
+//
+//
+//
+// })
 
 
 
@@ -107,3 +107,34 @@ $(".btnActivarHistorico").click(function (){
 })
 
 */
+
+
+/*=============================================
+CONFIRMAR ACCION DEL ASISTENTE ( ENTRADA / SALIDA )
+=============================================*/
+$(document).on("click", ".btnAccion", function(){
+
+	var nidentidad = $(this).attr("nidentidad");
+	var nomyape = $(this).attr("nomyape")
+	var accion = $(this).attr("accion");
+
+	swal({
+		title: '¿Confirma la '+accion.toUpperCase()+' de '+nomyape+'?',
+		text: "¡Si no está seguro puede cancelar la accíón!",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: 'Cancelar',
+		confirmButtonText: 'Si, Confirmar!'
+	}).then(function(result){
+
+		if(result.value){
+
+			window.location = "index.php?ruta=asistentes&nidentidad="+nidentidad+"&accion="+accion;
+
+		}
+
+	})
+
+})

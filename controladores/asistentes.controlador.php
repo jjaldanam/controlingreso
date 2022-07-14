@@ -138,6 +138,7 @@ class ControladorAsistentes{
 
         if(isset($_POST["nidentidad"])){
 
+
             // todo -Falta los preg_match de las demàs variables
             if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nomyape"]) &&
                 preg_match('/^[0-9]+$/', $_POST["nidentidad"]) &&
@@ -228,38 +229,37 @@ class ControladorAsistentes{
 
     static public function ctrConfirmarHistorico(){
 
-        if(isset($_POST["confirmarNidentidad"])){
-
+        if(isset($_GET["nidentidad"])){
 
 
             $tabla = "historico";
-            $valor1 = $_POST['confirmarAccion'];
-            $valor2 = $_POST['confirmarNidentidad'];
+            $valor1 = $_GET['accion'];
+            $valor2 = $_GET["nidentidad"];
 
 
             $respuesta = ModeloAsistentes::mdlInsertarHistorico($tabla, $valor1, $valor2);
 
             if($respuesta == "ok"){
 
+
                 echo '<script>
 
+                           
                         swal({
                             type: "success",
-                            title: "¡El usuario ha sido guardado correctamente!",
+                            title: "¡El usuario CONFIRMO  correctamente!",
                             showConfirmButton: true,
                             confirmButtonText: "Cerrar",
-                            closeOnConfirm: false
-                            
-                        }).then((result)=>{
-                            
-                            if(result.value){
+                            closeOnConfirm: false                            
+                            }).then((result)=>{                            
+                                        if(result.value){
                                 
-                                window.location.replace("asistentes");
-                                
-                            }
-                        });
+                                            window.location = "asistentes";
+                                            
+                                            }
+                                    })
                     
-                    </script>';
+                        </script>';
 
             }else{
 

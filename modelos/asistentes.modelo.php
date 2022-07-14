@@ -160,18 +160,33 @@ class ModeloAsistentes{
     }
 
     /*=============================================
-    INSERTAR HISTORICO - BOTON AJAX
+    INSERTAR HISTORICO - BOTON ACCION
     =============================================*/
 
     static public function mdlInsertarHistorico($tabla, $valor1, $valor2){
 
-        // Crear el registro en la tabla HISTORICO
-        $stmt2 = Conexion::conectar()->prepare("INSERT INTO $tabla ( id_historico, nidentidad_historico, accion, fecha, hora ) 
-                                                VALUES ( NULL, :nidentidad, :accion, :fecha, :hora )"
-        );
+
 
         $fechaActual = date('Y-m-d', time());
         $horaActual = date('H:i:s');
+        $marcaDeTiempo = date('Y-m-d H:i:s', time());
+
+         // ACTUALIZAR ultimologin en ASITENTES
+            $stmt1 = Conexion::conectar()->prepare("UPDATE asistentes SET ultimologin= '$valor1',
+                                                            ultimologinfecha='$marcaDeTiempo'
+                                                            WHERE nidentidad = $valor2");
+
+            $stmt1->execute();
+
+
+
+
+
+
+// Crear el registro en la tabla HISTORICO
+        $stmt2 = Conexion::conectar()->prepare("INSERT INTO $tabla ( id_historico, nidentidad_historico, accion, fecha, hora ) 
+                                                VALUES ( NULL, :nidentidad, :accion, :fecha, :hora )"
+        );
 
         $stmt2->bindParam(":nidentidad", $valor2, PDO::PARAM_INT);
         $stmt2->bindParam(":accion", $valor1, PDO::PARAM_STR);
@@ -183,22 +198,6 @@ class ModeloAsistentes{
 
 
         if($stmt2 -> execute()){
-
-            $marcaDeTiempo = date('Y-m-d H:i:s', time());
-
-
-            $stmt1 = Conexion::conectar()->prepare("UPDATE asistentes SET ultimologin= '$valor1',
-                                                            ultimologinfecha='$marcaDeTiempo'
-                                                            WHERE nidentidad = $valor2");
-
-            if(!$stmt1->execute()){
-                echo "error actualizando el asistente";
-            }
-
-
-            $stmt1->close();
-            $stmt1 = null;
-            // TERMINA de actualizar asistente
 
 
             return "ok";
@@ -212,6 +211,10 @@ class ModeloAsistentes{
         $stmt2 -> close();
 
         $stmt2 = null;
+
+        $stmt1->close();
+        $stmt1 = null;
+        //TERMINA de actualizar asistente
 
     }
 
@@ -229,6 +232,7 @@ class ModeloAsistentes{
         if ($stmt->execute()){
 
             return "ok";
+
 
         }else{
 

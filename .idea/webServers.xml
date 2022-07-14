@@ -8,6 +8,13 @@
       <webServer id="e1f41ee2-a9e8-49f2-976c-aa4ceb41c4c2" name="GestionEclesial" url="http://localhost/panela">
         <fileTransfer mountedRoot="C:\xampp\htdocs\panela" accessType="MOUNT" port="0" />
       </webServer>
+      <webServer id="0117d0d9-ecf7-4d6c-a987-c6e51c5f1361" name="innovacion" url="http://ftp.innovaciontecnica.com">
+        <fileTransfer rootFolder="/public_html" host="ftp.innovaciontecnica.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

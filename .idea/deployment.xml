@@ -16,6 +16,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="innovacion">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/controlingreso" local="$PROJECT_DIR$" web="/controlingreso" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="pos">
         <serverdata>
           <mappings>

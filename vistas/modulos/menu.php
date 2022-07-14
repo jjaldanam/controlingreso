@@ -26,27 +26,9 @@
 
             </li>
 
-            <li>
 
-                <a href="historico">
 
-                    <i class="fa fa-history"></i>
-                    <span>Histórico</span>
 
-                </a>
-
-            </li>
-
-			<li>
-
-				<a href="usuarios">
-
-					<i class="fa fa-users"></i>
-					<span>Usuarios</span>
-
-				</a>
-
-			</li>
 
             <!--<li>
 
